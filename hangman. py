@@ -1,0 +1,46 @@
+def x():
+        import random
+        class hangman:
+                def __init__(self,playername):
+                        self.playername=playername
+                def getword(self):
+                        wordlist=["lightyagami","boundman","narayana","erenjeager","shivamjadhav","ultrainstinct","roronoazoro","echirooda","akiratoriyama","yujirohanma","escanorsama","vegeta","katakuri","midoria"]
+                        return random.choice(wordlist).upper()
+                def check(self,word,guess):
+                        wd="".join([i.upper() if i in guess else "?" for i in word])
+                        print(wd)
+                        return "?" not in wd
+                def game(self):
+                        guess=''
+                        play=True
+                        pl=''
+                        c=0
+                        actualword=self.getword()
+                        while play:
+                                if len(guess)>=40:
+                                        print("sorry maximum tries are done you lost the game")
+                                        break
+                                inp=input(f"enter one character in  {len(actualword)}no of length of word")
+                                c+=1
+                                print(f"no of trials are{40-c}")
+                                while inp in guess or len(inp)>1:
+                                        if inp in guess:
+                                                inp=input(f"{inp} letter already is being guessed\n")
+                                        elif len(inp)>1:
+                                                inp=input(f"(inp) enter one character ony\n")
+                                guess+=inp.upper()
+                                t=self.check(actualword,guess.upper())
+                                if inp.upper() in actualword:
+                                        print(f"hurray! your character {inp} exist")
+                                else:
+                                        print(f"bad luck your character {inp} doesnot exist/ntry again!\n")
+                                if t:
+                                        print(f"hurray {self.playername}you are the winner!\nyou have successfully guessed the {actualword} in {len(guess)} attempts ")
+                                        break
+                               
+        s=hangman(input("enter player name"))
+        s.game()
+        k=input("wanna play again? yes or no")
+        if "YES" in k.upper():
+                s.game()
+x()
